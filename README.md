@@ -207,6 +207,14 @@ GitHub 上 Thunderbird 翻译类扩展普遍很小（star 数多在个位数）�
 
 A Thunderbird extension that translates the whole message body into Chinese and appends the translation below the original text. It targets users in mainland China by using **Alibaba Cloud Machine Translation** (1M characters/month free) or **Tencent Cloud TMT**, neither of which requires an international credit card. API keys are stored locally only; there is no backend server.
 
+## 支持这个项目
+
+如果这个插件帮你省下了时间，可以扫码请我喝杯咖啡。完全自愿，不影响任何功能。
+
+<img src=".github/sponsor.png" alt="微信赞赏码" width="240">
+
+比打赏更有用的支持方式：提 [Issue](https://github.com/shuai-beep/thunderbird-mail-translate/issues) 报 bug、提需求，或者点个 Star。
+
 ## License
 
 MIT
