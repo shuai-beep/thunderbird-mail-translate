@@ -11,15 +11,15 @@
 
 邮件工具栏上多一个「翻译」按钮：
 
-<img src="docs/screenshots/01-toolbar.png" alt="回复 转发 归档 垃圾 删除 翻译 更多" width="560">
+<img src="docs/screenshots/01-toolbar.png" alt="回复 转发 归档 垃圾 删除 翻译 更多" width="760">
 
 点一下，译文出现在正文下方，原文原样保留：
 
-<img src="docs/screenshots/03-translation.png" alt="英文原文下方显示中文译文区块" width="820">
+<img src="docs/screenshots/03-translation.png" alt="英文原文下方显示中文译文区块" width="760">
 
 配置很简单，填两个密钥、点「测试连接」：
 
-<img src="docs/screenshots/02-options.png" alt="选项页：服务商切换、密钥输入、翻译语言" width="640">
+<img src="docs/screenshots/02-options.png" alt="选项页：服务商切换、密钥输入、翻译语言" width="760">
 
 ## 为什么做这个
 
