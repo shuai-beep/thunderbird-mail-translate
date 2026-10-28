@@ -22,7 +22,7 @@ EXCLUDE_FILES = {
     "LICENSE",
     ".gitignore",
 }
-EXCLUDE_DIRS = {".git", "dist", "__pycache__", ".github"}
+EXCLUDE_DIRS = {".git", "dist", "__pycache__", ".github", "docs"}
 
 
 def read_version():

@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify tag matches manifest version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VER=$(python -c "import json;print(json.load(open('manifest.json',encoding='utf-8'))['version'])")
+          echo "tag=$TAG manifest=$VER"
+          if [ "$TAG" != "$VER" ]; then
+            echo "::error::tag $TAG 与 manifest 版本 $VER 不一致，请先改 manifest.json"
+            exit 1
+          fi
+
+      - name: Build xpi
+        run: python build.py
+
+      - name: Generate checksums
+        run: |
+          cd dist
+          for f in *.xpi; do
+            sha256sum "$f" > "$f.sha256"
+            echo "--- $f.sha256 ---"
+            cat "$f.sha256"
+          done
+
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: |
+            dist/*.xpi
+            dist/*.sha256
+          body: |
+            ## 安装
+
+            1. 下载下方 `mail-translate-${{ github.ref_name }}.xpi`（去掉 v 前缀）
+            2. Thunderbird → ≡ → 附加组件和主题 → 右上角齿轮 ⚙️ → **从文件安装附加组件**
+            3. 选择 xpi，确认添加
+            4. **完全退出 Thunderbird**（托盘图标右键退出）后重新打开
+
+            第 4 步不能省，注入到邮件页面的脚本需要重启才会加载。
+
+            ## 校验
+
+            下载后可用同名 `.sha256` 文件校验完整性：
+
+            ```bash
+            sha256sum -c mail-translate-*.xpi.sha256
+            ```
+
+            完整变更记录见 [CHANGELOG](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md)。

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: JS syntax check
+        run: |
+          for f in *.js; do
+            echo "checking $f"
+            node --check "$f"
+          done
+
+      - name: Validate manifest
+        run: |
+          python - <<'PY'
+          import json, sys
+          m = json.load(open("manifest.json", encoding="utf-8"))
+          required = ["manifest_version", "name", "version", "browser_specific_settings"]
+          missing = [k for k in required if k not in m]
+          if missing:
+              sys.exit(f"manifest 缺少字段: {missing}")
+          gid = m["browser_specific_settings"]["gecko"]["id"]
+          if "@" not in gid:
+              sys.exit(f"gecko id 格式可疑: {gid}")
+          print(f"manifest ok -> {m['name']} v{m['version']} ({gid})")
+          PY
+
+      - name: Build xpi
+        run: python build.py
+
+      - name: Show artifact
+        run: ls -la dist/
