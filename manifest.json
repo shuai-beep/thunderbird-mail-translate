@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "邮件翻译",
+  "version": "1.4.1",
+  "description": "一键把邮件正文翻译成中文，支持阿里云与腾讯云机器翻译，译文独立显示不破坏原文。",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mail-translate@shuai-beep",
+      "strict_min_version": "128.0"
+    }
+  },
+  "icons": {
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png"
+  },
+  "permissions": [
+    "messagesRead",
+    "messagesModify",
+    "menus",
+    "storage",
+    "tabs",
+    "notifications",
+    "https://mt.cn-hangzhou.aliyuncs.com/*",
+    "https://tmt.tencentcloudapi.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "message_display_action": {
+    "default_title": "翻译此邮件",
+    "default_label": "翻译",
+    "default_icon": {
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "64": "icons/icon-64.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

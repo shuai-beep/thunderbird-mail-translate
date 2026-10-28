@@ -1,0 +1,20 @@
+# 构建产物
+dist/
+*.xpi
+*.zip
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 临时
+*.log
+*.tmp

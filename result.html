@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>邮件译文</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #6b7280; --line: #e5e7eb;
+    --accent: #2f7ed8; --card: #f7f9fc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1d20; --fg: #e6e6e6; --muted: #9aa0a6; --line: #3a3b3f;
+      --accent: #6aa9e9; --card: #24252a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 28px 64px; background: var(--bg); color: var(--fg);
+    font: 15px/1.8 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    max-width: 860px; margin-left: auto; margin-right: auto;
+  }
+  h1 { font-size: 19px; font-weight: 600; margin: 0 0 8px; line-height: 1.5; }
+  .meta { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+  .bar {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    padding: 14px 0 20px; border-bottom: 1px solid var(--line); margin-bottom: 24px;
+  }
+  button {
+    padding: 7px 16px; font-size: 13px; font-family: inherit; cursor: pointer;
+    border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  .tag {
+    font-size: 12px; color: var(--accent); background: var(--card);
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .content { white-space: pre-wrap; word-break: break-word; }
+  details { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 18px; }
+  summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+  details .content { margin-top: 14px; font-size: 14px; color: var(--muted); }
+  .empty { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<h1 id="subject">…</h1>
+<p class="meta" id="author"></p>
+
+<div class="bar">
+  <span class="tag" id="tag">译文</span>
+  <button id="copy">复制译文</button>
+  <button id="addFont">放大字号</button>
+  <button id="subFont">缩小字号</button>
+</div>
+
+<div class="content" id="translated"></div>
+
+<details>
+  <summary>查看原文</summary>
+  <div class="content" id="source"></div>
+</details>
+
+<script src="result.js"></script>
+</body>
+</html>
